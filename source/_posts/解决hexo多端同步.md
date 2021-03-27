@@ -1,7 +1,7 @@
 ---
 title: 解决hexo多端同步
 date: 2021-03-26 17:14:57
-tags: hexo
+tags: [hexo, 同步, github] 
 categories: hexo
 ---
 前言：该篇转载自[《如何解决github+Hexo的博客多终端同步问题》by monkey_lzl](https://blog.csdn.net/Monkey_LZL/article/details/60870891?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
@@ -20,6 +20,7 @@ git remote add origin git@github.com:yourname/yourname.github.io.git    //将本
 git push origin hexo    //push到github项目的hexo分支上
 ```
 结果：github项目中会多出一个hexo分支，这个分支便是用来多端同步的关键部分
+<!--more-->
 
 # 终端2上的操作
 目标：完成clone和push更新
@@ -29,7 +30,7 @@ git push origin hexo    //push到github项目的hexo分支上
 git clone -b hexo git@github.com:yourname/yourname.github.io.git    //将github中的hexo分支clone到本地
 cd yourname.github.io    //切换到刚刚clone的文件夹内
 npm install    //切换到文件夹后进行安装必要的组件，无需ini
-hexo new pose "xxxx"    //新建一个.md文件，进行编辑完成博客
+hexo new post "xxxx"    //新建一个.md文件，进行编辑完成博客
 git add .    //git add source
 git commit -m "xx"
 git push origin hexo    //更新分支
@@ -38,10 +39,11 @@ hexo g -d
 
 # 不同终端以后的进行的操作
 内容：县进入自己相应的文件夹
+<br/>
 ```
 git pull origin hexo    //先pull完成本地与远端的融合
 hexo new post "new blog name"
-git add .
+git add .    //git add source
 git commit -m "xx"
 git push origin hexo
 hexo g -d
