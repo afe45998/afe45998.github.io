@@ -593,4 +593,385 @@ pizza = {
 
 ### 6.4.3 在字典中存储字典
 
-可以在字典中嵌套字典。例如，如果有多个网站用户，每个都有独特的用户名，可在字典中将用户名作为键，然后将每位用户的信息
+可以在字典中嵌套字典。例如，如果有多个网站用户，每个都有独特的用户名，可在字典中将用户名作为键，然后将每位用户的信息存储在一个字典中，并将该字典作为与用户名相关联的值。如下，对于每位用户，我们都存储了其三项信息：名、姓和居住地；为访问这些信息，我们遍历所有的用户名，并访问与每个用户名相关两的信息字典
+
+```python
+users = {
+    'aeinstein': {
+        'first': 'albert',
+        'last': 'einstein',
+        'location': 'princeton',
+    },
+
+    'mcurie': {
+        'first': 'marie',
+        'last': 'curie',
+        'location': 'paris',
+    },
+
+}
+```
+
+# 7. 用户输入和while循环
+
+## 7.1 函数 input() 的工作原理
+
+函数 input() 让程序暂停运行，等待用户输入一些文本。获取用户输入后，Python将其存储在一个变量中以便使用
+
+```python
+message = input("Tell me something, and I will repeat it back to you: ")
+print(message)
+```
+
+有时，提示可能超过一行，此时可以将提示存储在一个变量中，再将该变量传递给函数 input()
+
+```python
+prompt = "If you tell me who you are, we can personlize the messages you see."
+prompt += "\nWhat is your first name? "
+```
+
+结果显示如下，
+
+```python
+If you tell me who you are, we can personalize the messages you see.
+What is your first name? Eric
+
+Hello, Eric!
+```
+
+### 7.1.2 使用 int() 来获取数值输入
+
+使用函数 input() 时，Python将用户输入解读为字符串
+
+```bash
+>>> age = input("How old are you?")
+How old are you?
+>>> age
+'21'
+```
+
+函数 int() 将数字的字符串转换为数值表示，如下
+
+```bash
+>>> age = input("How old are you?")
+How old are you? 21
+>>> age = int(age)
+>>> age >= 18
+True
+```
+
+## 7.2 while循环简介
+
+### 7.2.1 使用while循环
+
+使用while循环输出1~5
+
+```python
+current_number = 1
+while current_number <=5:
+    print(current_number)
+    current_number += 1
+```
+
+### 7.2.3 使用标志(flag)
+
+在要求很多条件都满足才能继续运行的程序中，可定义一个变量，用于判断整个程序是否处于活动状态，这个变量成为**标志**，可以让程序在标志为 True 时继续运行，并在任何事件导致标志的值为 False 时让程序停止运行
+
+```python
+prompt = "If you tell me who you are, we can personlize the messages you see."
+prompt += "\nWhat is your first name? "
+
+active = True
+while active:
+    message = input(prompt)
+
+    if message = 'quit':
+        active = False
+    else:
+        print(message)
+```
+
+### 7.2.4 break与continue
+
+break: 立即退出while循环，不再运行 循环中余下的代码，也不管条件测试结果如何
+
+continue: 要返回到循环开头，并根据条件测试结果决定是否继续执行循环
+
+## 7.3 使用while循环来处理列表和字典
+
+for循环是一种遍历列表的有效方式，但在for循环中不应修改列表，否则将导致Python难以跟踪其中的元素。要在遍历列表的同时对其进行修改，可使用while循环。
+
+通过将while循环同列表和字典结合起来使用，,可收集、存储并组织大量输入，供以后查看和显示
+
+### 7.3.1 在列表之间移动元素
+
+使用一个while循环，在验证用户的同时将其从未验证用户列表中提取出来，再将其加入到另一个已验证用户列表中
+
+```python
+unconfirmed_users = ['alice', 'brian', 'candace']
+confirmed_users = []
+
+while unconfirmed_users:
+    current_user = unconfirmed_users.pop()
+    confirmed_users.append(current_user)
+```
+
+### 7.3.2 删除包含特定值的所有列表元素
+
+第三章中使用了 remove() 来删除列表中的特定值，前提是要删除的值再列表中只出现了一次
+
+要删除所有这类元素，可不断运行一个while循环，直到列表不再包含值'cat'
+
+```python
+pets = ['dog', 'cat', 'dog', 'goldfish', 'cat', 'rabbit', 'cat']
+print(pets)
+
+while 'cat' in pets:
+    pets.remove('cat')
+
+print(pets)
+```
+
+### 7.3.3 使用用户输入来填充字典
+
+可使用while循环提示用户输入任意数量的信息
+
+下面创建一个调查程序，其中的循环每执行时都提示输入被调查者的名字和回答
+
+```python
+responses = []
+# 设置一个标志，指出调查是否继续
+polling_active = True
+
+while polling_active:
+    # 提示输入被调查者的名字和回答
+    name = input("\nWhat is your name?")
+    response = input("Which moutain would you like to climb someday? ")
+    # 将答卷存储在字典中
+    responses[name] = response
+    # 看是否还有人要参与调查
+    repeat = input("Would you like to let another person respond? (yes/no) ")
+    if repeat == 'no':
+        polling_active = False
+
+# 调查结束，显示结果
+print("\n--- Poll Results ---")
+for name, response in responses.items():
+    print(name + " would like to climb " + response + ".")
+```
+
+# 8. 函数
+
+## 8.1 定义函数
+
+关键字def、函数名、括号、定义以结尾冒号结束
+
+"""xxx""" 为文档字符串(docstring)
+
+```python
+def greet_user():
+    """显示简单的问候语"""
+    print("Hello")
+
+greet_user()
+```
+
+### 8.1.1 向函数传递信息
+
+在函数定义def greet_user()的括号内添加username，通过在这里添加username，可以让函数接受给username指定的任意值
+
+```python
+def greet_user(username):
+    print("Hello, " + username.title() + "!")
+
+greet_user('jesse')
+```
+
+结果，
+
+```python
+Hello, Jesse!
+```
+
+### 8.1.2 实参与虚参
+
+在上面greet_user()的定义中，变量username是一个形参————**函数完成其工作所需的一项信息**
+
+在代码greet_user('jesse')中，值'jesse'是一个实参————**调用函数时传递给函数的信息**
+
+我们调用函数时，将要让函数使用的信息放在括号中内。在greet_user('jesse')中，将实参'jesse'传递给了函数greet_user()，这个值被存储在形参username中
+
+## 8.2 传递实参
+
+函数定义中可能有多个形参，故函数调用中也可能包含多个实参。向函数传递实参的方式：
+
+1.位置实参：要求实参的顺序与形参的顺序相同
+
+2.关键字实参：其中每个实参都由变量名和值组成
+
+3.还可以使用列表和字典
+
+### 8.2.1 位置实参
+
+在调用函数过程中，Python必须将函数调用中的每个实参都关联到函数定义中的一个形参。为此，最简单的关联方式是基于实参的顺序————位置实参
+
+```python
+def describe_pet(animal_type, pet_name):
+    """显示宠物的信息"""
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s name is " + pet_name.title() + ".")
+
+describe_pet('hamster', 'harry')
+```
+
+函数的定义表明，需要一种动物类型和一个名字。调用describe_pet()时，，需要按顺序提供一种动物类型和一个名字。如上述，实参'hamster'存储在形参animal_type中，而实参'harry'存储在形参pet_name中。
+
+结果，输出描述了一只名为Harry的仓鼠
+
+1.调用函数多次
+
+```python
+def describe_pet(animal_type, pet_name):
+    """显示宠物的信息"""
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s name is " + pet_name.title() + ".")
+
+describe_pet('hamster', 'harry')
+
+describe_pet('dog', 'willie')
+```
+
+在函数中，可根据需要次数使用任意数量的位置实参，Python将按顺序将函数调用中的实参关联到函数定义中相应的形参
+
+2.位置实参的顺序很重要
+
+### 8.2.2 关键字实参
+
+关键字实参时传递给函数的名称-值对。关键字实参使我们无需考虑函数调用中的实参顺序，还清楚地指出了函数调用中各个值的用途
+
+```python
+def describe_pet(animal_type, pet_name):
+    """显示宠物的信息"""
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s name is " + pet_name.title() + ".")
+
+describe_pet(animal_type='hamster', pet_name='harry')
+# 等价于
+describe_pet(pet_name='harry', animal_type='hamster')
+```
+
+关键字实参的顺序无关紧要，弹药准确地指定函数定义中的形参名
+
+### 8.2.3 默认值
+
+在调用函数中给形参提供了实参时，Python将使用指定的实参值；否则，则使用形参的默认值
+
+```python
+def describe_pet(pet_name, animal_type='dog'):
+    """显示宠物的信息"""
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s name is " + pet_name.title() + ".")
+
+# describe_pet('hamster', 'harry')
+
+describe_pet('dog', 'willie')
+```
+
+注意，在这个函数定义中，修改了形参的排列顺序。由于给animal_type指定了默认值，无需通过实参来指定动物类型，因此在函数调用中只包含一个实参————宠物的名字。但是，Python仍将这个实参视为位置实参，因此如果函数调用中只包含宠物的名字，这个实参将关联到函数定义中的第一个形参。这就是将pet_name放在形参列表开头的原因。
+
+1.在调用中只提供小狗的名字
+
+```python
+describe_pet('willie')
+```
+
+只提供了一个实参————'willie'，这个实参将关联到函数定义中的第一个形参————pet_name。由于没有给animal_type提供实参，因此Python使用其默认值'dog'
+
+2.描述的不是小狗
+
+```python
+describe_pet(pet_name='harry', animal_type='hamster')
+```
+
+由于显式地给animal_type提供了实参，因此Python将忽略这个形参的默认值
+
+### 8.2.4 等效的函数调用
+
+可以混合使用位置实参、关键字实参和默认值
+
+```python
+def describe_pet(pet_name, animal_type='dog'):
+
+# 一条名为Willie的小狗
+describe_pet('willie')
+describe_pet(pet_name='willie')
+
+# 一只名为Harry的仓鼠
+describe_pet('harry','hamster')
+describe_pet(pet_name='harry', animal_type='hamster')
+describe_pet(animal_type='hamster', pet_name='harry')
+```
+
+这些函数调用都可以
+
+## 8.3 返回值
+
+在函数中，可使用return语句将值返回到调用函数的代码行。
+
+### 8.3.1 返回简单值
+
+函数接受名和姓并返回整洁的姓名:
+
+```python
+def get_formatted_name(first_name, last_name):
+    """返回整洁的姓名"""
+    full_name = first_name + last_name
+    return full_name.title()
+
+musician = get_formatted_name('jimi', 'hendrix')
+print(musician)
+```
+
+结果，
+
+```python
+Jimi Hendrix
+```
+
+### 8.3.2 让实参变成可选的
+
+可通过使用默认值来让实参变成可选的
+
+扩展get_formatted_name，使其还处理中间名
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
