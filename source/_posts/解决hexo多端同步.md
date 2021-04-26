@@ -47,4 +47,8 @@ git add .    //git add source
 git commit -m "xx"
 git push origin hexo
 hexo g -d
+
+对于需要合并时可以输入以下两条命令
+git reset --hard
+git pull origin hexo
 ```
