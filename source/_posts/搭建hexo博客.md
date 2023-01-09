@@ -9,7 +9,7 @@ categories: 教程
 # 2. 安装hexo
 · 以管理员身份运行Git Bash
 
-· 切换镜像源
+· 切换到淘宝镜像源
 ```
 $ npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
@@ -18,8 +18,37 @@ $ npm install -g cnpm --registry=https://registry.npm.taobao.org
 $ cnpm install -g hexo-cli
 ```
 <!--more-->
+# 3. 使用hexo搭建博客
+· 创建一个目录
+```
+$ mkdir Blog
+```
+· 用hexo命令初始化一个博客
+```
+$ hexo init
+```
+· 安装deployer部署插件
+```
+npm install --save hexo-deployer-git
+```
+· 配置_config.yml文件
+```
+deploy:
+  type: git
+  repo: https://github.com/AxelHarness/AxelHarness.github.io.git
+  branch: master
+```
 
-# 3. 关于SSH
+
+# 4. 关于SSH
+## 检查电脑上是否有SSH KEY
+· 使用命令检查电脑上有没有.ssh文件夹
+```
+~/.ssh 
+OR
+~/.ssh ls
+```
+## 创建SSH KEY
 · Open Git Bash<br/>
 · Generating a new SSH key and adding it to the ssh-agent
 ```
