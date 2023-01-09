@@ -11,7 +11,7 @@ categories: hexo
 请点击： [Aplayer](https://github.com/DIYgod/APlayer)
 
 # 复制 dist 文件夹
-将加压后的文件夹中的 dist 文件夹复制到你的创建博客路径下： blog/themes/next/source
+将解压后的文件夹中的 dist 文件夹复制到你的创建博客路径下： blog/themes/next/source
 <!--more-->
 
 # 新建 music.js
