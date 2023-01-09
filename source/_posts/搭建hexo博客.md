@@ -1,6 +1,5 @@
 ---
 title: 搭建Hexo博客
-date: 
 tags: [hexo]
 categories: 教程
 ---
@@ -9,7 +8,7 @@ categories: 教程
 
 # 2. 安装hexo
 · 以管理员身份运行Git Bash
-<br/>
+
 · 切换镜像源
 ```
 $ npm install -g cnpm --registry=https://registry.npm.taobao.org
@@ -18,6 +17,7 @@ $ npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
 $ cnpm install -g hexo-cli
 ```
+<!--more-->
 
 # 3. 关于SSH
 · Open Git Bash<br/>
